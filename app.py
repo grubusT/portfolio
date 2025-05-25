@@ -159,9 +159,9 @@ def add_asset_to_portfolio():
     purchase_date = None
     if purchase_date_str:
         try:
-            purchase_date = datetime.fromisoformat(purchase_date_str)
+            purchase_date = datetime.strptime(purchase_date_str, '%d-%m-%Y')
         except ValueError:
-            return jsonify({"error": "Invalid 'purchase_date' format. Use ISO format (YYYY-MM-DDTHH:MM:SS)"}), 400
+            return jsonify({"error": "Invalid 'purchase_date' format. Use DD-MM-YYYY"}), 400
     
     asset_args = {
         'name': name,
@@ -284,9 +284,9 @@ def update_asset_in_portfolio(asset_id):
 
         if 'purchase_date' in data and data['purchase_date']:
             try:
-                asset.purchase_date = datetime.fromisoformat(data['purchase_date'])
+                asset.purchase_date = datetime.strptime(data['purchase_date'], '%d-%m-%Y')
             except ValueError:
-                return jsonify({"error": "Invalid 'purchase_date' format. Use ISO format (YYYY-MM-DDTHH:MM:SS)"}), 400
+                return jsonify({"error": "Invalid 'purchase_date' format. Use DD-MM-YYYY"}), 400
 
         if asset.type == 'stock':
             if 'ticker_symbol' in data: asset.ticker_symbol = data['ticker_symbol']

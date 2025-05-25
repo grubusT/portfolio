@@ -6,6 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const addAssetForm = document.getElementById('add-asset-form');
     const assetTypeSelect = document.getElementById('asset-type');
 
+    // Helper function to format ISO date string to DD-MM-YYYY
+    function formatDateDDMMYYYY(isoString) {
+        if (!isoString) return 'N/A'; // Handle cases where date might be null or undefined
+        const date = new Date(isoString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    }
+
     // Function to show/hide asset-specific fields based on selection
     function toggleAssetSpecificFields() {
         const selectedType = assetTypeSelect.value;
@@ -55,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <li class="list-group-item"><strong>ID:</strong> ${asset.id}</li>
                             <li class="list-group-item"><strong>Current Value:</strong> <span class="fw-bold text-success">$${asset.current_value.toFixed(2)}</span></li>
                             <li class="list-group-item"><strong>Initial Value:</strong> $${asset.initial_value.toFixed(2)}</li>
-                            <li class="list-group-item"><strong>Purchase Date:</strong> ${new Date(asset.purchase_date).toLocaleDateString()}</li>
+                            <li class="list-group-item"><strong>Purchase Date:</strong> ${formatDateDDMMYYYY(asset.purchase_date)}</li>
                     `;
 
                     if (asset.description) {

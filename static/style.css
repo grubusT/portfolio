@@ -1,85 +1,206 @@
+/* static/style.css - Enhanced for a more human feel */
+
 body {
-    font-family: sans-serif;
-    line-height: 1.6;
+    font-family: 'Open Sans', sans-serif; /* New body font */
+    line-height: 1.7;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #f8f9fa; /* Softer background */
+    color: #343a40; /* Softer text color */
+    font-weight: 400;
 }
 
-header {
-    background: #333;
-    color: #fff;
-    padding: 1rem 0;
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif; /* New heading font */
+    font-weight: 700;
+    color: #2c3e50; /* A deep, friendly blue-grey for headings */
+}
+
+.display-4 { /* Bootstrap override for consistency */
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* --- Header & Footer --- */
+header.bg-dark,
+footer.bg-dark {
+    background-color: #4A90E2 !important; /* Friendly blue - !important to override Bootstrap */
+    color: #ffffff;
+    padding: 1.5rem 0; /* Increased padding */
     text-align: center;
 }
 
 header h1 {
     margin: 0;
+    font-size: 2.2rem; /* Slightly adjusted for the new font */
 }
 
-main {
-    padding: 1rem;
-    max-width: 960px;
+/* Style for the main title "Portfolio Tracker" */
+header h1.display-4 {
+    font-family: 'Montserrat', sans-serif; /* Ensure it uses Montserrat */
+    font-weight: 700; /* Explicitly set to bold */
+    color: #000000; /* Set color to black */
+    /* font-size can be inherited from header h1 or overridden here if needed */
+}
+
+footer p {
+    margin: 0;
+}
+
+/* --- Main Content & Layout --- */
+main.container {
+    padding: 2rem 1rem; /* More vertical padding */
+    max-width: 1140px; /* Slightly wider for modern screens */
     margin: auto;
 }
 
-section {
-    background: #fff;
-    padding: 1.5rem;
+/* --- Cards & Sections --- */
+section,
+.card {
+    background: #ffffff;
+    padding: 2rem; /* More padding inside cards */
+    margin-bottom: 1.5rem;
+    border-radius: 8px; /* Softer, rounder corners */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Softer, more diffused shadow */
+    border: none; /* Remove default Bootstrap card border if any */
+}
+
+.card-title {
+    font-family: 'Montserrat', sans-serif;
     margin-bottom: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-h2 {
-    color: #333;
-    margin-top: 0;
-}
-
+/* --- Assets Display --- */
 #assets-container .asset {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
+    /* Using Bootstrap's card styling now, so direct styling might not be needed 
+       unless further customization for individual asset cards is desired.
+       If Bootstrap cards are used directly, these styles might conflict or be redundant.
+       Assuming assets will be rendered into Bootstrap cards for consistency. */
+    /* border: 1px solid #e0e0e0; */ /* Lighter border if not using full card style */
+    /* padding: 15px; */
+    /* margin-bottom: 15px; */
+    /* border-radius: 6px; */
 }
 
 #assets-container .asset h3 {
     margin-top: 0;
+    font-size: 1.4rem;
 }
 
+/* --- Forms --- */
 label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 0.5rem;
+    font-weight: 600; /* Open Sans semi-bold for labels */
+    color: #495057;
 }
 
 input[type="text"],
 input[type="number"],
-select {
-    width: calc(100% - 12px);
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+input[type="email"], /* Added for completeness */
+input[type="password"], /* Added for completeness */
+select,
+textarea { /* Added textarea for consistency */
+    width: 100%; /* Use 100% and rely on Bootstrap's col/grid for sizing */
+    padding: 0.75rem 1rem; /* More padding */
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da; /* Standard Bootstrap border color */
+    border-radius: 6px; /* Slightly rounder */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-button {
-    background: #333;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #4A90E2; /* Focus color matching header */
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25); /* Bootstrap-like focus shadow */
+    outline: none;
 }
 
-button:hover {
-    background: #555;
+/* --- Buttons --- */
+.btn-primary {
+    background-color: #50C878 !important; /* A welcoming green, overriding Bootstrap */
+    border-color: #50C878 !important; /* Match border color */
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
 }
 
-footer {
-    text-align: center;
-    padding: 1rem 0;
-    margin-top: 2rem;
-    background: #333;
-    color: #fff;
+.btn-primary:hover {
+    background-color: #45b068 !important; /* Darker green on hover */
+    border-color: #45b068 !important;
+    transform: translateY(-1px); /* Subtle lift effect */
+}
+
+.btn-primary:active {
+    transform: translateY(0px); /* Reset lift on active */
+}
+
+/* Custom button for delete/secondary actions if needed */
+.btn-danger {
+    background-color: #E74C3C !important; /* A clear, but not overly aggressive red */
+    border-color: #E74C3C !important;
+    /* Keep other primary button styles for consistency */
+}
+
+.btn-danger:hover {
+    background-color: #C0392B !important;
+    border-color: #C0392B !important;
+}
+
+
+/* Adjustments for Bootstrap elements */
+.text-primary {
+    color: #4A90E2 !important; /* Align Bootstrap's primary text color with our theme */
+}
+
+.lead {
+    font-weight: 400; /* Ensure lead text is not overly bold with Open Sans */
+    font-size: 1.15rem; /* Slightly smaller if Open Sans appears larger */
+}
+
+/* Utility class for a subtle text color */
+.text-muted-custom {
+    color: #6c757d; /* Bootstrap's muted color, ensure consistency */
+}
+
+/* --- Responsive adjustments --- */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    main.container {
+        padding: 1.5rem 0.5rem;
+    }
+    .card,
+    section {
+        padding: 1.5rem;
+    }
+    .btn-primary {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Remove default browser styles for some elements that Bootstrap might not cover aggressively */
+button, input, select, textarea {
+    margin: 0; /* Reset margin if not already handled by Bootstrap's reboot */
+}
+
+/* Adding some subtle animations/transitions for a more dynamic feel */
+.card:hover {
+    /* Optional: subtle lift effect on card hover */
+    /* transform: translateY(-2px); */
+    /* box-shadow: 0 6px 16px rgba(0,0,0,0.1); */
+    /* transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; */
 } 

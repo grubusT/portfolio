@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Portfolio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="bg-dark text-white p-4 mb-4">
+        <div class="container">
+            <h1 class="display-4">Portfolio Tracker</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="portfolio-overview" class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title">Portfolio Overview</h2>
+                <p class="lead">Total Portfolio Value: <strong id="total-value" class="text-primary">Loading...</strong></p>
+            </div>
+        </section>
+
+        <div class="row">
+            <div class="col-md-8">
+                <section id="assets-list" class="mb-4">
+                    <h2>Assets</h2>
+                    <div id="assets-container" class="row row-cols-1 row-cols-md-2 g-4">
+                        <!-- Assets will be loaded here by JavaScript as cards -->
+                        <p class="col">Loading assets...</p>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-4">
+                <section id="add-asset-form-section" class="card">
+                    <div class="card-body">
+                        <h2 class="card-title mb-3">Add New Asset</h2>
+                        <form id="add-asset-form">
+                            <div class="mb-3">
+                                <label for="asset-type" class="form-label">Asset Type:</label>
+                                <select id="asset-type" name="asset_type" class="form-select" required>
+                                    <option value="" disabled selected>Select type...</option>
+                                    <option value="stock">Stock</option>
+                                    <option value="cryptocurrency">Cryptocurrency</option>
+                                    <option value="physical_asset">Physical Asset</option>
+                                </select>
+                            </div>
+
+                            <div id="common-fields">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name:</label>
+                                    <input type="text" id="name" name="name" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="initial-value" class="form-label">Initial Value (Purchase Price):</label>
+                                    <input type="number" id="initial-value" name="initial_value" step="0.01" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description (Optional):</label>
+                                    <input type="text" id="description" name="description" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="purchase-date" class="form-label">Purchase Date (Optional):</label>
+                                    <input type="text" id="purchase-date" name="purchase_date" class="form-control" placeholder="YYYY-MM-DDTHH:MM:SS">
+                                </div>
+                            </div>
+
+                            <div id="stock-fields" class="asset-specific-fields mb-3" style="display: none;">
+                                <h5 class="mt-3">Stock Details</h5>
+                                <div class="mb-3">
+                                    <label for="ticker-symbol" class="form-label">Ticker Symbol:</label>
+                                    <input type="text" id="ticker-symbol" name="ticker_symbol" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="shares-owned" class="form-label">Shares Owned:</label>
+                                    <input type="number" id="shares-owned" name="shares_owned" step="any" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exchange" class="form-label">Exchange (Optional):</label>
+                                    <input type="text" id="exchange" name="exchange" class="form-control">
+                                </div>
+                                 <div class="mb-3">
+                                    <label for="stock-current-value" class="form-label">Current Total Value for Stock (Optional):</label>
+                                    <input type="number" id="stock-current-value" name="current_value" step="0.01" class="form-control">
+                                </div>
+                            </div>
+
+                            <div id="crypto-fields" class="asset-specific-fields mb-3" style="display: none;">
+                                <h5 class="mt-3">Cryptocurrency Details</h5>
+                                <div class="mb-3">
+                                    <label for="crypto-symbol" class="form-label">Symbol (e.g., BTC):</label>
+                                    <input type="text" id="crypto-symbol" name="symbol" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="quantity-owned" class="form-label">Quantity Owned:</label>
+                                    <input type="number" id="quantity-owned" name="quantity_owned" step="any" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="wallet-address" class="form-label">Wallet Address (Optional):</label>
+                                    <input type="text" id="wallet-address" name="wallet_address" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="crypto-current-value" class="form-label">Current Total Value for Crypto (Optional):</label>
+                                    <input type="number" id="crypto-current-value" name="current_value" step="0.01" class="form-control">
+                                </div>
+                            </div>
+
+                            <div id="physical-asset-fields" class="asset-specific-fields mb-3" style="display: none;">
+                                <h5 class="mt-3">Physical Asset Details</h5>
+                                <div class="mb-3">
+                                    <label for="current-estimated-value" class="form-label">Current Estimated Value:</label>
+                                    <input type="number" id="current-estimated-value" name="current_estimated_value" step="0.01" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="location" class="form-label">Location (Optional):</label>
+                                    <input type="text" id="location" name="location" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="condition" class="form-label">Condition (Optional):</label>
+                                    <input type="text" id="condition" name="condition" class="form-control">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Add Asset</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white text-center p-3 mt-5">
+        <p>&copy; 2024 Portfolio Tracker</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</body>
+</html> 

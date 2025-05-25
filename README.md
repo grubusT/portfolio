@@ -1,6 +1,6 @@
 # Portfolio Tracker
 
-A web application to track your diverse financial assets, including stocks, cryptocurrencies, and physical assets. Built with Python, Flask, and a touch of JavaScript for a dynamic frontend experience.
+A web application to track your diverse financial assets in real time, all collated together for that bigger picture.
 
 ## Features
 
@@ -13,7 +13,7 @@ A web application to track your diverse financial assets, including stocks, cryp
 
 ## Tech Stack
 
-*   **Python 3.x**
+*   **Python**
 *   **Flask**: For the web framework and backend API.
 *   **SQLAlchemy**: For ORM and database interaction.
 *   **SQLite**: As the database (included with Python).
@@ -35,8 +35,6 @@ A web application to track your diverse financial assets, including stocks, cryp
 *   `instance/portfolio.db`: The SQLite database file where all asset data is stored (created automatically).
 
 
-### Main Page (`/`)
-
 *   **Portfolio Overview**:
     *   Displays the total current value of all assets.
 *   **Assets List**:
@@ -57,7 +55,7 @@ A web application to track your diverse financial assets, including stocks, cryp
 
 
 ## Future Improvements
-
+*   **Streamlining the asset addition process
 *   **User Authentication**: Secure the portfolio with user login.
 *   **Edit Functionality**: Allow editing of existing assets.
 *   **Enhanced Analytics**: Add charts and graphs to visualize portfolio performance, diversification, and historical value.

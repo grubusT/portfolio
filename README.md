@@ -34,9 +34,6 @@ A web application to track your diverse financial assets, including stocks, cryp
     *   `index.html`: The main page of the application, displaying the portfolio overview, assets list, and the form to add new assets.
 *   `instance/portfolio.db`: The SQLite database file where all asset data is stored (created automatically).
 
-## Web Interface
-
-The web interface provides a user-friendly way to manage your assets:
 
 ### Main Page (`/`)
 
@@ -58,65 +55,6 @@ The web interface provides a user-friendly way to manage your assets:
         *   **Cryptocurrency**: Symbol, Quantity Owned, Wallet Address, Current Total Value (Optional - will fetch if not provided).
         *   **Physical Asset**: Current Estimated Value, Location, Condition.
 
-## Data Storage
-
-All asset data is stored in a SQLite database file named `portfolio.db` located in the `instance/` directory (which is created automatically if it doesn't exist).
-
-### Database Schema
-
-The database uses a single table `asset` with a polymorphic `type` column to store different kinds of assets.
-
-**`asset` Table:**
-
-*   `id` (String, Primary Key, UUID) - Unique identifier for the asset.
-*   `name` (String, Not Null) - Name of the asset.
-*   `description` (String) - Optional description.
-*   `purchase_date` (DateTime, Not Null) - Date the asset was acquired.
-*   `initial_value` (Float, Not Null) - Value of the asset at the time of purchase.
-*   `current_value` (Float, Not Null) - Current market value of the asset (updated dynamically for stocks/crypto).
-*   `type` (String, Not Null) - Discriminator column (e.g., 'stock', 'cryptocurrency', 'physical_asset').
-*   **Stock Specific Fields (Nullable):**
-    *   `ticker_symbol` (String)
-    *   `shares_owned` (Float)
-    *   `exchange` (String)
-*   **Cryptocurrency Specific Fields (Nullable):**
-    *   `symbol` (String)
-    *   `quantity_owned` (Float)
-    *   `wallet_address` (String)
-*   **Physical Asset Specific Fields (Nullable):**
-    *   `location` (String)
-    *   `condition` (String)
-
-## Setup and Running
-
-1.  **Clone the repository (if applicable).**
-2.  **Ensure Python 3 is installed.**
-3.  **Create a virtual environment (recommended):**
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
-    ```
-4.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-    *(Note: You'll need to create a `requirements.txt` file if one doesn't exist. Based on the `app.py`, it should contain at least `Flask`, `Flask-SQLAlchemy`, and `requests`.)*
-5.  **API Keys (Important):**
-    *   This application uses the **Alpha Vantage API** for stock prices and the **CoinGecko API** for cryptocurrency prices.
-    *   You need to obtain an API key from [Alpha Vantage](https://www.alphavantage.co/support/#api-key).
-    *   Replace the placeholder `ALPHA_VANTAGE_API_KEY = "YWBWKOL7A0CJRCCA"` in `app.py` with your actual Alpha Vantage API key.
-    *   CoinGecko's public API is used for crypto prices and generally doesn't require a key for basic use as implemented.
-6.  **Initialize the database:**
-    The database and tables will be created automatically when the application first runs and attempts a database operation.
-7.  **Run the application:**
-    ```bash
-    flask run
-    ```
-    Or, if you have a specific run configuration in `app.py` (e.g., `if __name__ == '__main__': app.run(debug=True)`), you can run:
-    ```bash
-    python app.py
-    ```
-8.  Open your web browser and navigate to `http://127.0.0.1:5000/`.
 
 ## Future Improvements
 
